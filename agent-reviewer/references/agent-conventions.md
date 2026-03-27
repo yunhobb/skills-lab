@@ -87,7 +87,7 @@ Scale sections to their weight — a two-sentence section doesn't need its own h
 | Pattern | Example |
 |---------|---------|
 | Imperative form | "Read the file", "Analyze the diff" |
-| Reason-based rules | "Use lowercase — the official project doesn't capitalize it outside logos" |
+| Reason-based rules | "Use lowercase — the official project doesn't capitalize it outside of logos" |
 | Direct tone | Like explaining to a capable colleague |
 | Selective bold | Only key terms the agent must not miss |
 | Backticks for code only | Commands, filenames, tool names |

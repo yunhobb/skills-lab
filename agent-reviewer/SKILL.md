@@ -1,6 +1,6 @@
 ---
 name: agent-reviewer
-description: This skill should be used when the user asks to "review an agent", "check agent quality", "improve agent file", "rewrite agent", "agent style check", "agent convention check", "check agent frontmatter", "improve agent description", or provides an agent .md file path for review. Use this skill whenever the user mentions agent definition quality, agent description triggering, agent system prompt style, or wants to improve any agent file — even if they don't explicitly say "review".
+description: This skill should be used when the user asks to "review an agent", "check agent quality", "improve agent file", "rewrite agent", "agent style check", "agent convention check", "check agent frontmatter", "improve agent description", or provides an agent `.md` file path for review. Use this skill whenever the user mentions agent definition quality, agent description triggering, agent system prompt style, or wants to improve any agent file — even if they don't explicitly say "review".
 allowed-tools: Read, Write, Edit, Glob, Grep
 ---
 
@@ -10,7 +10,7 @@ Rewrite agent definition files (`.md` with YAML frontmatter) to follow Claude Co
 
 ## Input
 
-The user provides an agent file path (e.g., `~/.claude/plugins/my-plugin/agents/code-reviewer.md`). Read the file directly. If the user provides a directory, look for `.md` files inside an `agents/` subdirectory.
+The user provides an agent file path (e.g., `~/.claude/plugins/my-plugin/agents/code-reviewer.md`). Read the file directly. If the user provides a directory, look for `.md` files inside an `agents/` subdirectory. If exactly one agent `.md` file is found, treat that as the target. If multiple agent `.md` files are found, do not rewrite them all; instead, either ask the user to specify a single file or explain that they must provide a specific agent file path. Never rewrite more than one agent file per request.
 
 ## Convention Reference
 
