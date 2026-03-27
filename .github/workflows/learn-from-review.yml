@@ -50,8 +50,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUM: ${{ github.event.pull_request.number }}
           PR_TITLE: ${{ github.event.pull_request.title }}
+          RUN_ID: ${{ github.run_id }}
         run: |
-          BRANCH_NAME="learn/pr-${PR_NUM}"
+          BRANCH_NAME="learn/pr-${PR_NUM}-run-${RUN_ID}"
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -60,15 +61,20 @@ jobs:
           git commit -m "learn: PR #${PR_NUM} 리뷰 댓글 수집"
           git push origin "$BRANCH_NAME"
 
+          PR_BODY_FILE=$(mktemp)
+          cat > "$PR_BODY_FILE" <<EOF
+## 출처
+PR #${PR_NUM}: ${PR_TITLE}
+
+## 다음 단계
+1. 이 PR을 체크아웃
+2. \`/review-learnings ${PR_NUM}\` 스킬 실행 → 댓글 분석 + 규칙 추상화 + 적절성 판단
+3. 결과를 확인하고 merge
+
+> Copilot 리뷰 댓글이 자동 수집되었습니다.
+> 규칙 추상화와 적절성 판단은 Claude Code 스킬로 수행합니다.
+EOF
+
           gh pr create \
             --title "learn: PR #${PR_NUM} 리뷰 댓글 수집" \
-            --body "## 출처
-          PR #${PR_NUM}: ${PR_TITLE}
-
-          ## 다음 단계
-          1. 이 PR을 체크아웃
-          2. \`/review-learnings ${PR_NUM}\` 스킬 실행 → 댓글 분석 + 규칙 추상화 + 적절성 판단
-          3. 결과를 확인하고 merge
-
-          > Copilot 리뷰 댓글이 자동 수집되었습니다.
-          > 규칙 추상화와 적절성 판단은 Claude Code 스킬로 수행합니다."
+            --body-file "$PR_BODY_FILE"
