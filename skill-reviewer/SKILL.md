@@ -22,7 +22,7 @@ The `description` field is the primary trigger mechanism — it determines wheth
 
 - Write in **trigger-condition style** with specific phrases users would say. Summarizing the workflow causes Claude to shortcut the skill body instead of reading it.
 - Be slightly pushy — include adjacent phrases and edge cases where the skill should still trigger. Claude tends to under-trigger, so err on the side of broader matching.
-- Include both what the skill does AND when to use it.
+- Include both what the skill does and when to use it.
 
 Good: `This skill should be used when the user asks to "create a hook", "add a PreToolUse hook", or mentions hook events.`
 
