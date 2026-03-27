@@ -36,50 +36,39 @@ jobs:
         if: env.comment_count == '0'
         run: echo "리뷰 댓글이 없습니다. 스킵합니다."
 
-      - name: Extract rules
+      - name: Collect comments to markdown
         if: env.comment_count != '0'
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           chmod +x .github/scripts/extract-review-rules.sh
           bash .github/scripts/extract-review-rules.sh /tmp/review-comments.json
 
-      - name: Create learning PR
+      - name: Create review candidates PR
         if: env.comment_count != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUM: ${{ github.event.pull_request.number }}
           PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
-          # 변경 사항이 없으면 스킵
-          if git diff --quiet .claude/review-learnings.md .github/review-rules.md; then
-            echo "변경 사항이 없습니다. 스킵합니다."
-            exit 0
-          fi
-
           BRANCH_NAME="learn/pr-${PR_NUM}"
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b "$BRANCH_NAME"
-          git add .claude/review-learnings.md .github/review-rules.md
-          git commit -m "learn: PR #${PR_NUM} 리뷰에서 규칙 추출"
+          git add .claude/review-candidates.md
+          git commit -m "learn: PR #${PR_NUM} 리뷰 댓글 수집"
           git push origin "$BRANCH_NAME"
 
-          DIFF_RULES=$(git diff HEAD~1 -- .claude/review-learnings.md | grep '^+- ' | sed 's/^+//' || true)
-
           gh pr create \
-            --title "learn: PR #${PR_NUM} 리뷰 학습" \
+            --title "learn: PR #${PR_NUM} 리뷰 댓글 수집" \
             --body "## 출처
           PR #${PR_NUM}: ${PR_TITLE}
 
-          ## 추출된 규칙
-          ${DIFF_RULES}
+          ## 다음 단계
+          1. 이 PR을 체크아웃
+          2. \`/review-learnings ${PR_NUM}\` 스킬 실행 → 댓글 분석 + 규칙 추상화 + 적절성 판단
+          3. 결과를 확인하고 merge
 
-          ## 검증 체크리스트
-          - [ ] 규칙이 일반적으로 적용 가능한가? (프로젝트 특화가 아닌지)
-          - [ ] 기존 규칙과 중복되지 않는가?
-          - [ ] 규칙 표현이 명확한가?
-
-          > 자동 추출된 규칙입니다. 적절한지 확인 후 merge 해주세요."
+          > Copilot 리뷰 댓글이 자동 수집되었습니다.
+          > 규칙 추상화와 적절성 판단은 Claude Code 스킬로 수행합니다."
