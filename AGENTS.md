@@ -2,6 +2,28 @@
 
 Claude Code 스킬과 에이전트를 개발하고 테스트하는 레포지토리.
 
+<purpose>
+
+이 레포는 Claude Code의 확장 기능(스킬, 에이전트, 훅)을 만들고 품질을 검증하는 곳이다. 만든 스킬/에이전트는 다른 프로젝트에서 재사용된다 — 여기서 품질이 낮으면 사용하는 모든 곳에서 문제가 생긴다.
+
+</purpose>
+
+<quality>
+
+좋은 스킬/에이전트의 조건:
+
+1. **트리거가 정확하다** — description이 유저 의도를 잘 매칭해서, 필요할 때 발동하고 불필요할 때는 발동하지 않는다
+2. **최소 권한이다** — 필요한 도구만 부여하고, 필요한 범위만 다룬다. 과도한 권한은 부작용을 일으킨다
+3. **출력이 일관된다** — 같은 유형의 입력에 대해 예측 가능한 형식과 품질의 결과를 낸다
+4. **이유가 있다** — 규칙마다 왜 그런지 설명이 있어서, 에이전트가 엣지 케이스를 판단할 수 있다
+
+나쁜 스킬/에이전트:
+- description이 모호해서 트리거가 안 되거나 엉뚱한 데서 발동
+- 도구를 전부 열어놓아서 의도하지 않은 파일 수정 발생
+- MUST/ALWAYS 남발로 에이전트가 이유를 이해 못하고 기계적으로 따름
+
+</quality>
+
 <workflow>
 
 모든 작업은 이 흐름을 따른다. Issue를 먼저 만드는 이유는 "뭘 왜 했는지"를 나중에도 추적할 수 있게 하기 위해서다. 채팅은 사라지지만 Issue는 남는다.
@@ -15,7 +37,7 @@ Claude Code 스킬과 에이전트를 개발하고 테스트하는 레포지토�
 5. Push — 작업이 끝나면 remote에 push한다.
 6. PR 생성 — PR body에 `Closes #<number>`를 넣어서 Issue와 연결한다.
 
-Review, Merge, Worktree 정리는 사용자가 직접 한다.
+Review, Merge, Worktree 정리는 사용자가 직접 한다. pre-commit hook이 실패하면 문제를 고친 뒤 새 commit을 만든다 — amend는 이력이 사라지므로 하지 않는다.
 
 </basic-flow>
 
@@ -59,40 +81,15 @@ GitHub Issue에서 Parent Issue = 사양, Sub-Issue = 작업 단위, Comment = �
 
 <issue-management>
 
-Issue는 작업 추적 시스템이다. 작업을 시작하기 전에 기존 이슈를 확인하고, 없으면 새로 만든다.
-
-```bash
-gh issue list --state open
-gh issue create --title "작업 제목" --body "작업 내용" --label "feat"
-```
-
-큰 작업은 sub-issue로 분할하면 여러 agent가 병렬로 처리할 수 있다.
-
-```bash
-gh issue create --title "하위 작업" --body "Parent: #<parent-number>"
-```
+Issue는 작업 추적 시스템이다. 작업을 시작하기 전에 기존 이슈를 확인하고, 없으면 새로 만든다. 큰 작업은 sub-issue로 분할하면 여러 agent가 병렬로 처리할 수 있다.
 
 Issue body에는 **무엇을 왜 하는지**와 **TODO 체크박스**를 담는다. 처음부터 완벽할 필요 없다 — 작업하면서 추가하거나 수정한다. 파일/디렉터리 목록을 미리 설계하지 않는다 — 범위는 TODO에서 자연스럽게 드러난다.
 
 </issue-management>
 
-<commits-and-prs>
-
-Commit 메시지는 Conventional Commits 형식(`feat(scope): subject`)을 따른다. pre-commit hook이 실패하면 문제를 고친 뒤 새 commit을 만든다 — amend는 이력이 사라지므로 하지 않는다.
-
-PR body에 `Closes #<number>`를 넣어서 Issue와 연결한다. PR description에 담기엔 긴 내용은 `docs/` 디렉터리에 파일로 작성하고, issue에서 링크한다.
-
-</commits-and-prs>
-
 <git-worktree>
 
-branch checkout 대신 git worktree를 사용한다. 여러 agent가 동시에 작업할 때 branch switching이 충돌을 일으키지만, worktree는 각각 독립된 working directory를 가지므로 이 문제가 없다.
-
-```bash
-git worktree add ../<repo>-<topic> -b <branch-name>
-git worktree list
-git worktree remove ../<repo>-<topic>
-```
+branch checkout 대신 git worktree를 사용한다 — 여러 agent가 동시에 작업할 때 branch switching이 충돌을 일으키지만, worktree는 각각 독립된 working directory를 가지므로 이 문제가 없다.
 
 Branch 이름은 `<type>/<short-description>` 패턴을 따른다. type은 `feat`, `docs`, `fix`, `refactor`, `chore` 중 하나다.
 
@@ -100,32 +97,48 @@ Branch 이름은 `<type>/<short-description>` 패턴을 따른다. type은 `feat
 
 </git-worktree>
 
-<doc-structure>
+<project-specific>
 
-각 workspace(서브디렉터리)는 이 구조를 따른다:
+## 스킬 목록
 
-```text
-workspace/
-  README.md    # 프로젝트 개요 + docs/ 인덱스 테이블
-  AGENTS.md    # 프로젝트별 agent 컨텍스트
-  CLAUDE.md    # AGENTS.md delegation
-  docs/        # 상세 문서 (주제별 1파일)
-```
+| 스킬 | 경로 | 역할 |
+|------|------|------|
+| skill-reviewer | `skill-reviewer/` | SKILL.md를 Anthropic 스타일 가이드 기준으로 리뷰 |
+| agent-reviewer | `agent-reviewer/` | 에이전트 정의 파일을 컨벤션 기준으로 리뷰 |
+| review-learnings | `review-learnings/` | PR 리뷰 댓글에서 규칙 추출 + 적절성 판단 |
 
-`docs/` 디렉터리가 핵심이다. 주제별로 파일을 분리하면 여러 agent가 서로 다른 문서를 동시에 작성할 수 있다. 파일명은 lowercase, hyphen 구분(`concepts.md`, `docker-local-lab.md`), 각 파일은 H1 제목으로 시작하고 이후 H2 섹션으로 구성한다.
+## 에이전트 목록
 
-README.md는 프로젝트 개요와 docs/ 링크 테이블을 담는다:
+| 에이전트 | 경로 | 역할 |
+|---------|------|------|
+| req-analyzer | `.claude/agents/req-analyzer.md` | 모호한 요구사항 분석 오케스트레이터 |
+| req-explorer | `.claude/agents/req-explorer.md` | 코드베이스/웹 맥락 수집 |
+| req-validator | `.claude/agents/req-validator.md` | 구현 가능성 + 방향 적절성 검증 |
 
-```markdown
-# 프로젝트 제목
+## 컨벤션
 
-## 개요
-프로젝트에 대한 간단한 설명
+### 스킬 작성
 
-## 문서 목차
-| 문서 | 설명 |
-|------|------|
-| [concepts.md](./docs/concepts.md) | 핵심 개념 정리 |
-```
+- `description`은 trigger-condition 스타일로 작성 — Claude가 유저 의도를 매칭할 때 사용
+- 본문은 500줄 이하 유지, 상세 내용은 `references/`로 분리
+- 명령형 스타일, 이유 기반 규칙, 필러 제거
 
-</doc-structure>
+### 에이전트 작성
+
+- frontmatter 필수 필드: `name`, `description`, `model`, `color`
+- `description`에 `<example>` 블록 2-4개 포함
+- `tools`는 최소 권한 원칙
+- 상세 컨벤션은 `agent-reviewer/references/agent-conventions.md` 참조
+
+### 리뷰 학습 규칙
+
+코딩 시 `.claude/review-learnings.md`의 규칙을 참조하여 같은 실수를 반복하지 않는다.
+
+## 훅
+
+| 훅 | 트리거 | 동작 |
+|----|--------|------|
+| `agent-review-reminder.sh` | `agents/*.md` 생성/수정 | agent-reviewer 리뷰 권장 |
+| `skill-review-reminder.sh` | `skills/*/SKILL.md` 생성/수정 | skill-reviewer 리뷰 권장 |
+
+</project-specific>
