@@ -75,19 +75,19 @@ These patterns come from Anthropic's skill-creator and their prompting best prac
 **Heavy directive to reasoning-based:**
 ```
 BEFORE: You MUST ALWAYS use lowercase for kubernetes.
-AFTER:  Use lowercase for kubernetes — the official project does not capitalize it outside of logos.
+AFTER: Use lowercase for kubernetes — the official project does not capitalize it outside of logos.
 ```
 
 **Second person to imperative:**
 ```
 BEFORE: You should review the document for grammar errors first.
-AFTER:  Review grammar and spelling first.
+AFTER: Review grammar and spelling first.
 ```
 
 **Bold overuse:**
 ```
 BEFORE: Use **dashes** for **all lists**. Do **not** use **asterisks**.
-AFTER:  Use dashes (`-`) for all lists. Do not use asterisks.
+AFTER: Use dashes (`-`) for all lists. Do not use asterisks.
 ```
 
 **Deep nesting to flat:**
@@ -107,7 +107,7 @@ Lists: use dashes for all unordered lists. Use numbers for ordered lists.
 
 1. Read the SKILL.md and understand its purpose before changing anything
 2. Assess the three review dimensions (description, structure, style) and note issues
-3. Rewrite the file applying fixes — style and structure only, not behavior
+3. Rewrite the file applying fixes — style, structure, and description quality; do not alter the skill's core logic or capabilities
 4. Write the result back to the same path
 5. Report what changed: the review findings per dimension and the major transformations applied
 
