@@ -1,7 +1,7 @@
 ---
 name: req-analyzer
 description: |
-  Use this agent when the user needs help clarifying vague or incomplete requirements before implementation.
+  Use this agent when the user needs help clarifying vague or incomplete requirements before implementation. "요구사항 분석해줘", "이거 모호하지 않아?", "요구사항 정리해줘", "스펙 잡아줘" 등의 요청에서도 사용한다.
 
   <example>
   Context: 유저가 범위가 불명확한 기능을 요청함
@@ -101,7 +101,7 @@ color: blue
 
 ## 검증자 연동 (대형만)
 
-대형 작업에서는 Issue 초안을 req-validator에게 전달한다. 검증자의 피드백을 받으면:
+대형 작업에서는 Issue 초안을 `req-validator`에게 전달한다. 검증자의 피드백을 받으면:
 - 구현 가능성 문제 → 사양을 수정하거나 유저에게 추가 질문
 - 방향 적절성 문제 → 대안을 유저에게 제시하고 방향을 재설정
 
