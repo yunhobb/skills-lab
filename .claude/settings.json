@@ -1,0 +1,21 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/agent-review-reminder.sh",
+            "statusMessage": "에이전트 파일 확인 중..."
+          },
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/skill-review-reminder.sh",
+            "statusMessage": "스킬 파일 확인 중..."
+          }
+        ]
+      }
+    ]
+  }
+}
