@@ -1,8 +1,30 @@
 ---
 name: req-explorer
-description: 요구사항 분석의 맥락 수집 단계를 담당하는 탐색 에이전트. 코드베이스 구조, 기존 패턴, 관련 외부 기술 정보를 조사하여 맥락 리포트를 생성한다. req-analyzer가 중형 이상 작업에서 호출한다.
+description: |
+  Use this agent when req-analyzer needs codebase and web context before analyzing medium or large requirements.
+
+  <example>
+  Context: req-analyzer가 모호한 점 3개 이상인 중형 작업을 판단함
+  user: (req-analyzer 내부 위임)
+  assistant: "코드베이스와 외부 기술 맥락을 수집하기 위해 req-explorer를 호출합니다."
+  <commentary>
+  중형 이상 작업에서 분석 전 맥락 수집이 필요할 때 호출.
+  </commentary>
+  </example>
+
+  <example>
+  Context: 요구사항에 언급된 기술이 현재 코드베이스에 있는지 확인 필요
+  user: (req-analyzer 내부 위임)
+  assistant: "기존 코드에 관련 패턴이 있는지 탐색합니다."
+  <commentary>
+  요구사항과 기존 코드베이스의 관계 파악이 필요할 때 호출.
+  </commentary>
+  </example>
+
+  직접 호출하지 않는다 — req-analyzer가 오케스트레이션한다.
 tools: Read, Grep, Glob, WebSearch, WebFetch
 model: sonnet
+color: cyan
 ---
 
 # 요구사항 탐색자

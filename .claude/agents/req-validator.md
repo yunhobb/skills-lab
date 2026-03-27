@@ -1,8 +1,30 @@
 ---
 name: req-validator
-description: 요구사항 사양의 구현 가능성과 방향 적절성을 검증하는 에이전트. req-analyzer가 대형 작업에서 사양 초안 검토를 위해 호출한다.
+description: |
+  Use this agent when req-analyzer needs a specification draft reviewed for implementability and directional correctness on large tasks.
+
+  <example>
+  Context: req-analyzer가 대형 작업의 사양 초안을 완성함
+  user: (req-analyzer 내부 위임)
+  assistant: "사양 초안의 구현 가능성과 방향 적절성을 검증합니다."
+  <commentary>
+  전체적으로 불명확한 대형 작업에서 사양 품질을 게이트하기 위해 호출.
+  </commentary>
+  </example>
+
+  <example>
+  Context: 요구사항이 명확하지만 현재 코드베이스 방향과 맞지 않을 수 있음
+  user: (req-analyzer 내부 위임)
+  assistant: "현재 아키텍처와의 정합성을 검토합니다."
+  <commentary>
+  방향 적절성 검증이 필요할 때 호출. 기존 구조와 충돌하는 요구사항 감지.
+  </commentary>
+  </example>
+
+  직접 호출하지 않는다 — req-analyzer가 오케스트레이션한다.
 tools: Read, Grep, Glob
 model: sonnet
+color: yellow
 ---
 
 # 요구사항 검증자
