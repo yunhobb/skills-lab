@@ -23,13 +23,10 @@ ls -la ~/.claude/skills/
 
 ### 심링크 제거
 
-수동으로 제거하려면:
+`setup.sh` 스크립트에 `uninstall` 인자를 전달하여 심링크를 제거할 수 있습니다.
 
 ```bash
-rm ~/.claude/skills/skill-reviewer
-rm ~/.claude/skills/agent-reviewer
-rm ~/.claude/skills/review-learnings
-```
+bash setup.sh uninstall
 
 ## 스킬 및 에이전트 목록
 
