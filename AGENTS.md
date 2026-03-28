@@ -105,6 +105,15 @@ gh api repos/<owner>/<repo>/issues/<parent_number>/sub_issues --jq '.[].number'
 
 주의: sub-issue 연결 API는 **순차 실행**해야 한다. 병렬로 실행하면 priority 필드 충돌로 일부가 실패한다.
 
+### Issue 제목 prefix
+
+Issue 제목에 `[작업정리]` prefix를 붙여서 목록에서 맥락을 바로 파악할 수 있게 한다. sub-issue는 `/Sub`를 추가한다.
+
+- Parent: `[작업정리] 제목` — 예: `[백엔드 서비스] 금융 시장 데이터 백엔드 서비스 구현`
+- Sub-issue: `[작업정리/Sub] 제목` — 예: `[백엔드 서비스/Sub] 종목 조회 API`
+
+parent와 sub-issue는 **같은 작업정리 이름**을 사용한다. `작업정리`는 parent 작업의 핵심을 2-4글자로 요약한 것이다.
+
 </issue-management>
 
 <git-worktree>
