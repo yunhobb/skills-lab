@@ -3,7 +3,7 @@
 
 FILE_PATH=$(jq -r '.tool_input.file_path' 2>/dev/null)
 
-if echo "$FILE_PATH" | grep -q 'skills/.*SKILL\.md$'; then
+if echo "$FILE_PATH" | grep -q 'SKILL\.md$'; then
   cat <<'HOOK_JSON'
 {"hookSpecificOutput":{"hookEventName":"PostToolUse","additionalContext":"스킬 파일이 생성/수정되었습니다. skill-reviewer로 리뷰를 권장합니다."}}
 HOOK_JSON
