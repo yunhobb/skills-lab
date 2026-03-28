@@ -132,7 +132,7 @@ Branch 이름은 `<type>/<short-description>` 패턴을 따른다. type은 `feat
 
 ### 리뷰 학습 규칙
 
-코딩 시 `.claude/review-learnings.md`의 규칙을 참조하여 같은 실수를 반복하지 않는다.
+코딩 시 레포의 "리뷰 학습 규칙" 문서를 참조하여 같은 실수를 반복하지 않는다.
 
 ## 훅
 
