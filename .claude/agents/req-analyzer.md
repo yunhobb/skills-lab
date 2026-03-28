@@ -95,9 +95,33 @@ color: blue
 - [ ] 항목 2
 ```
 
-규모가 클 경우 sub-issue로 분할한다:
+규모가 클 경우 sub-issue로 분할한다. 분할 결과는 호출자가 GitHub 네이티브 sub-issue API로 바로 생성+연결할 수 있도록 구조화된 형식으로 출력한다.
+
+분할 기준:
 - 독립적으로 수행 가능한 단위로 나눈다
 - 각 sub-issue에 TODO 체크박스를 포함한다
+
+출력 형식 — parent issue와 sub-issue를 다음 구조로 반환한다. 제목에는 `[작업정리]` prefix를 붙인다 (AGENTS.md의 Issue 제목 prefix 규칙 참조).
+
+```
+## PARENT
+title: [작업정리] (parent issue 제목)
+body: |
+  (parent issue body — 목표, 배경, 설계 결정, 제약 조건)
+
+## SUB_ISSUES
+- title: [작업정리/Sub] (sub-issue 1 제목)
+  body: |
+    (sub-issue 1 body — 목표, TODO)
+- title: [작업정리/Sub] (sub-issue 2 제목)
+  body: |
+    (sub-issue 2 body — 목표, TODO)
+```
+
+호출자는 이 출력을 받아서:
+1. parent issue를 `gh issue create`로 생성
+2. 각 sub-issue를 `gh issue create`로 생성
+3. 네이티브 sub-issue API로 parent에 순차 연결 (AGENTS.md의 네이티브 Sub-issue 섹션 참조)
 
 ## 검증자 연동 (대형만)
 
