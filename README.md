@@ -31,22 +31,9 @@ rm ~/.claude/skills/agent-reviewer
 rm ~/.claude/skills/review-learnings
 ```
 
-## 스킬 목록
+## 스킬 및 에이전트 목록
 
-| 스킬 | 역할 |
-|------|------|
-| `skill-reviewer` | SKILL.md 파일을 Anthropic 스타일 가이드 기준으로 리뷰 |
-| `agent-reviewer` | 에이전트 정의 파일을 컨벤션 기준으로 리뷰 |
-| `review-learnings` | PR 리뷰 댓글에서 규칙 추출 + 적절성 판단 |
-
-## 에이전트 목록
-
-| 에이전트 | 역할 |
-|---------|------|
-| `req-analyzer` | 모호한 요구사항 분석 오케스트레이터 |
-| `req-explorer` | 코드베이스/웹 맥락 수집 |
-| `req-validator` | 구현 가능성 + 방향 적절성 검증 |
-
+이 레포지토리에서 관리하는 스킬과 에이전트의 전체 목록 및 상세 설명은 [AGENTS.md](AGENTS.md#스킬-목록)를 참조하세요.
 ## 기여
 
 스킬이나 에이전트를 추가한 후 `setup.sh`의 `SKILLS` 배열에 디렉토리 이름을 추가하세요.
