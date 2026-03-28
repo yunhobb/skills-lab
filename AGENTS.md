@@ -85,6 +85,26 @@ Issue는 작업 추적 시스템이다. 작업을 시작하기 전에 기존 이
 
 Issue body에는 **무엇을 왜 하는지**와 **TODO 체크박스**를 담는다. 처음부터 완벽할 필요 없다 — 작업하면서 추가하거나 수정한다. 파일/디렉터리 목록을 미리 설계하지 않는다 — 범위는 TODO에서 자연스럽게 드러난다.
 
+### 네이티브 Sub-issue
+
+Sub-issue는 GitHub의 네이티브 sub-issue API로 생성한다 — body에 체크박스로 링크하는 방식이 아니라, 실제 parent-child 관계를 설정한다. 네이티브 sub-issue는 GitHub UI에서 진행률 바로 표시되고, sub-issue를 닫으면 parent에 자동 반영된다.
+
+```bash
+# 1. sub-issue 생성
+gh issue create --repo <owner>/<repo> --title "Sub-issue 제목" --body "내용"
+
+# 2. sub-issue의 ID 조회 (-F는 integer로 전달)
+ISSUE_ID=$(gh api repos/<owner>/<repo>/issues/<number> --jq '.id')
+
+# 3. parent에 네이티브 sub-issue로 연결 (순차 실행 — 병렬 시 priority 충돌)
+gh api repos/<owner>/<repo>/issues/<parent_number>/sub_issues --method POST -F sub_issue_id=$ISSUE_ID
+
+# 4. 확인
+gh api repos/<owner>/<repo>/issues/<parent_number>/sub_issues --jq '.[].number'
+```
+
+주의: sub-issue 연결 API는 **순차 실행**해야 한다. 병렬로 실행하면 priority 필드 충돌로 일부가 실패한다.
+
 </issue-management>
 
 <git-worktree>

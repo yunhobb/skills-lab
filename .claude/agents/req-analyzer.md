@@ -95,9 +95,21 @@ color: blue
 - [ ] 항목 2
 ```
 
-규모가 클 경우 sub-issue로 분할한다:
+규모가 클 경우 GitHub 네이티브 sub-issue로 분할한다. body에 체크박스로 링크하는 방식이 아니라, API로 실제 parent-child 관계를 설정한다 — GitHub UI에서 진행률이 자동 표시되고, sub-issue를 닫으면 parent에 반영된다.
+
+분할 기준:
 - 독립적으로 수행 가능한 단위로 나눈다
 - 각 sub-issue에 TODO 체크박스를 포함한다
+
+sub-issue 연결 방법:
+```bash
+# sub-issue 생성 후 ID 조회
+ISSUE_ID=$(gh api repos/<owner>/<repo>/issues/<number> --jq '.id')
+# parent에 연결 (-F로 integer 전달, 순차 실행 필수)
+gh api repos/<owner>/<repo>/issues/<parent>/sub_issues --method POST -F sub_issue_id=$ISSUE_ID
+```
+
+주의: 연결 API는 순차 실행한다 — 병렬 실행 시 priority 충돌로 일부가 실패한다.
 
 ## 검증자 연동 (대형만)
 
