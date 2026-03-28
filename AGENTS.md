@@ -147,6 +147,7 @@ Branch 이름은 `<type>/<short-description>` 패턴을 따른다. type은 `feat
 | skill-reviewer | `skill-reviewer/` | SKILL.md를 Anthropic 스타일 가이드 기준으로 리뷰 |
 | agent-reviewer | `agent-reviewer/` | 에이전트 정의 파일을 컨벤션 기준으로 리뷰 |
 | review-learnings | `review-learnings/` | PR 리뷰 댓글에서 규칙 추출 + 적절성 판단 |
+| deep-thinking | `deep-thinking/` | 구현 전 깊은 사고 워크플로우 가이드 (약점 발굴 → 결정 문서화) |
 
 ## 에이전트 목록
 
@@ -155,6 +156,8 @@ Branch 이름은 `<type>/<short-description>` 패턴을 따른다. type은 `feat
 | req-analyzer | `.claude/agents/req-analyzer.md` | 모호한 요구사항 분석 오케스트레이터 |
 | req-explorer | `.claude/agents/req-explorer.md` | 코드베이스/웹 맥락 수집 |
 | req-validator | `.claude/agents/req-validator.md` | 구현 가능성 + 방향 적절성 검증 |
+| design-challenger | `.claude/agents/design-challenger.md` | 설계/코드의 숨겨진 약점과 엣지케이스 발굴 |
+| decision-documenter | `.claude/agents/decision-documenter.md` | 기술 결정과 트레이드오프를 ADR 형식으로 기록 |
 
 ## 컨벤션
 
