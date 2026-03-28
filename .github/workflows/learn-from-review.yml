@@ -62,18 +62,17 @@ jobs:
           git push origin "$BRANCH_NAME"
 
           PR_BODY_FILE=$(mktemp)
-          cat > "$PR_BODY_FILE" <<EOF
-## 출처
-PR #${PR_NUM}: ${PR_TITLE}
+          cat > "$PR_BODY_FILE" << 'PREOF'
+          ## 출처
+          해당 PR의 Copilot 리뷰 댓글을 자동 수집했습니다.
 
-## 다음 단계
-1. 이 PR을 체크아웃
-2. \`/review-learnings ${PR_NUM}\` 스킬 실행 → 댓글 분석 + 규칙 추상화 + 적절성 판단
-3. 결과를 확인하고 merge
+          ## 다음 단계
+          1. 이 PR을 체크아웃
+          2. `/review-learnings` 스킬 실행 → 댓글 분석 + 규칙 추상화 + 적절성 판단
+          3. 결과를 확인하고 merge
 
-> Copilot 리뷰 댓글이 자동 수집되었습니다.
-> 규칙 추상화와 적절성 판단은 Claude Code 스킬로 수행합니다.
-EOF
+          > 규칙 추상화와 적절성 판단은 Claude Code 스킬로 수행합니다.
+          PREOF
 
           gh pr create \
             --title "learn: PR #${PR_NUM} 리뷰 댓글 수집" \
