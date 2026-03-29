@@ -184,9 +184,11 @@ plan.md의 각 Phase를 구체적 작업 단위로 분해한다. 각 작업은 �
 - 기존 파일 구조를 따른다 — 새 디렉터리를 만들면 기존 구조와의 관계를 설명
 - 기존 컨벤션(네이밍, 에러 처리, 테스트 패턴)을 따른다
 
-## design-challenger 연동
+## 후속 에이전트 연동
 
-세 파일을 작성한 뒤 design-challenger로 검증을 권장한다. 특히 spec.md의 아키텍처 결정과 plan.md의 Phase 분리가 적절한지 확인받으면 구현 단계에서의 재작업을 줄일 수 있다.
+세 파일을 작성한 뒤:
+- **design-challenger**: spec.md의 아키텍처 결정과 plan.md의 Phase 분리가 적절한지 검증한다. 구현 전에 약점을 찾으면 재작업을 줄일 수 있다.
+- **tdd-implementor**: tasks.md 기반으로 RED→GREEN→REFACTOR 사이클로 구현을 진행한다. 각 작업을 TDD로 수행하며 완료 시 tasks.md를 체크한다.
 
 ## 제약사항
 

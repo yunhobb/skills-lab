@@ -22,4 +22,5 @@
 | design-architect | `.claude/agents/design-architect.md` | 요구사항 → spec.md + plan.md + tasks.md 생성 |
 | design-challenger | `.claude/agents/design-challenger.md` | 설계/코드의 숨겨진 약점과 엣지케이스 발굴 |
 | decision-documenter | `.claude/agents/decision-documenter.md` | 기술 결정과 트레이드오프를 ADR 형식으로 기록 |
+| tdd-implementor | `.claude/agents/tdd-implementor.md` | RED→GREEN→REFACTOR 사이클로 TDD 구현 |
 | issue-filter | `.claude/agents/issue-filter.md` | Issue의 가치/범위 판단 + 다음 단계 라우팅 추천 |
