@@ -23,7 +23,7 @@ echo ""
 mkdir -p "$SKILLS_DIR"
 
 for skill in "${SKILLS[@]}"; do
-  SOURCE="$SCRIPT_DIR/$skill"
+  SOURCE="$SCRIPT_DIR/.claude/skills/$skill"
   TARGET="$SKILLS_DIR/$skill"
 
   if [ ! -d "$SOURCE" ]; then
