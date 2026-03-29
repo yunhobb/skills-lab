@@ -10,6 +10,7 @@
 | deep-thinking | `.claude/skills/deep-thinking/` | 구현 전 깊은 사고 워크플로우 가이드 (약점 발굴 → 결정 문서화) |
 | notion-import | `.claude/skills/notion-import/` | Notion PDF 기획서 → req-analyzer 연동 |
 | work-sync | `.claude/skills/work-sync/` | 대화 중 의사결정·범위 변경을 Issue/MD에 반영 |
+| daily-upgrade | `.claude/skills/daily-upgrade/` | Homebrew 패키지 업그레이드 + Brewfile 동기화 + RTK 훅 검증 |
 
 ## 에이전트
 
