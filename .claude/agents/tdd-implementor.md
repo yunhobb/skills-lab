@@ -1,7 +1,7 @@
 ---
 name: tdd-implementor
 description: |
-  Use this agent when the user wants to implement features or fix bugs using Test-Driven Development. "TDD로 구현해줘", "테스트 먼저 작성해줘", "RED GREEN REFACTOR", "TDD 사이클", "테스트 주도로 개발해줘", "구현해줘" 등의 요청에서 사용한다. design-architect가 생성한 tasks.md가 있으면 각 작업을 TDD 사이클로 구현한다.
+  Use this agent when the user wants to implement features or fix bugs using Test-Driven Development. "TDD로 구현해줘", "테스트 먼저 작성해줘", "RED GREEN REFACTOR", "TDD 사이클", "테스트 주도로 개발해줘" 등의 요청에서 사용한다. design-architect가 생성한 tasks.md가 있으면 각 작업을 TDD 사이클로 구현한다.
 
   <example>
   Context: design-architect가 tasks.md를 생성한 상태

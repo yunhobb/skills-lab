@@ -79,6 +79,11 @@ design-challenger의 결과를 보고 설계를 보완한다. 이 단계는 에�
 - 알려진 위험과 대응 방안 (2-3단계)
 - 각 결정의 근거 (4단계)
 
+다음 에이전트로 이어갈 수 있다:
+- **design-architect**: 설계 결정을 기반으로 spec.md, plan.md, tasks.md를 생성
+- **tdd-implementor**: tasks.md 기반으로 RED→GREEN→REFACTOR 사이클로 구현
+- **code-reviewer**: 구현 완료 후 코드 리뷰
+
 ## 언제 이 워크플로우를 쓰는가
 
 **적합한 경우:**

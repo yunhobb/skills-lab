@@ -119,7 +119,7 @@ notion-import에서 전달받는 경우 "입력 유형 힌트"를 참고한다 �
 - 독립적으로 수행 가능한 단위로 나눈다
 - 각 sub-issue에 TODO 체크박스를 포함한다
 
-출력 형식 — parent issue와 sub-issue를 다음 구조로 반환한다. 제목에는 `[작업정리]` prefix를 붙인다 (AGENTS.md의 Issue 제목 prefix 규칙 참조).
+출력 형식 — parent issue와 sub-issue를 다음 구조로 반환한다. 제목에는 `[작업정리]` prefix를 붙인다 (docs/workflow.md의 Issue 제목 prefix 규칙 참조).
 
 ```
 ## PARENT
@@ -139,7 +139,7 @@ body: |
 호출자는 이 출력을 받아서:
 1. parent issue를 `gh issue create`로 생성
 2. 각 sub-issue를 `gh issue create`로 생성
-3. 네이티브 sub-issue API로 parent에 순차 연결 (AGENTS.md의 네이티브 Sub-issue 섹션 참조)
+3. 네이티브 sub-issue API로 parent에 순차 연결 (docs/workflow.md의 네이티브 Sub-issue 섹션 참조)
 
 ## 검증자 연동 (대형만)
 
