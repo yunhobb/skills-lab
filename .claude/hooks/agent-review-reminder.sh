@@ -3,7 +3,7 @@
 
 FILE_PATH=$(jq -r '.tool_input.file_path' 2>/dev/null)
 
-if echo "$FILE_PATH" | grep -q 'agents/.*\.md$'; then
+if echo "$FILE_PATH" | grep -q '\.claude/agents/.*\.md$'; then
   cat <<'HOOK_JSON'
 {"hookSpecificOutput":{"hookEventName":"PostToolUse","additionalContext":"에이전트 파일이 생성/수정되었습니다. agent-reviewer로 리뷰를 권장합니다."}}
 HOOK_JSON
