@@ -9,26 +9,9 @@ Claude Code 스킬과 에이전트를 개발하고 테스트하는 레포지토�
 ```bash
 git clone git@github.com:yunhobb/skills-lab.git
 cd skills-lab
-bash setup.sh
 ```
 
-`setup.sh`는 프로젝트의 스킬 디렉토리를 `~/.claude/skills/`에 심링크로 연결합니다. Claude Code를 재시작하면 스킬이 인식됩니다.
-
-### 심링크 확인
-
-```bash
-ls -la ~/.claude/skills/
-# skill-reviewer -> /path/to/skills-lab/.claude/skills/skill-reviewer
-# agent-reviewer -> /path/to/skills-lab/.claude/skills/agent-reviewer
-# review-learnings -> /path/to/skills-lab/.claude/skills/review-learnings
-# deep-thinking  -> /path/to/skills-lab/.claude/skills/deep-thinking
-```
-
-### 심링크 제거
-
-```bash
-bash setup.sh uninstall
-```
+Claude Code는 프로젝트의 `.claude/skills/`와 `.claude/agents/`를 자동으로 인식합니다. 별도 설정이 필요 없습니다.
 
 ## 에이전트
 
@@ -119,6 +102,16 @@ bash setup.sh uninstall
 제안: 학생 레벨 락 추가. 단, 강좌 락과의 순서를 통일해야 데드락 방지.
 ```
 
+### 요구사항 필터링
+
+| 에이전트 | 역할 | 모델 | 도구 |
+|---------|------|------|------|
+| `spec-distiller` | PM 기획서에서 핵심 요구사항(Intent)과 구현 제안(Implementation) 분리 | sonnet | Read, Grep, Glob |
+| `issue-filter` | Issue의 가치/범위 판단 + 다음 단계 라우팅 추천 | sonnet | Read, Grep, Glob |
+
+- **spec-distiller**: 기획서에서 "PM이 진짜 원하는 것"과 "기술적 제안"을 분리한다. 성공 정의를 Intent 기반으로 도출하여 구현 방법이 바뀌어도 유효하게 한다.
+- **issue-filter**: "이거 해야 해?"와 "범위가 적절해?"만 판단한다. 구현 전에 가치와 범위를 점검하는 게이트 역할.
+
 #### decision-documenter
 
 기술 결정을 ADR(Architecture Decision Record) 형식으로 기록하는 에이전트. 코드를 수정하지 않으며 문서 생성만 수행한다.
@@ -170,6 +163,7 @@ Pessimistic Lock. 수강신청은 정확성 > 속도인 도메인이며,
 | 스킬 | 호출 | 역할 |
 |------|------|------|
 | `deep-thinking` | `/deep-thinking` | 구현 전 깊은 사고 워크플로우 가이드 |
+| `work-sync` | `/work-sync` | 대화 중 의사결정·범위 변경을 Issue/MD에 반영 |
 
 #### deep-thinking
 
@@ -204,4 +198,4 @@ Pessimistic Lock. 수강신청은 정확성 > 속도인 도메인이며,
 
 ## 기여
 
-스킬이나 에이전트를 추가한 후 `setup.sh`의 `SKILLS` 배열에 디렉토리 이름을 추가하세요. 상세 컨벤션은 [AGENTS.md](AGENTS.md)를 참조하세요.
+스킬은 `.claude/skills/`, 에이전트는 `.claude/agents/`에 추가합니다. 상세 컨벤션은 [docs/conventions.md](docs/conventions.md)를 참조하세요.
