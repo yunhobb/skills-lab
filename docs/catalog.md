@@ -15,10 +15,10 @@
 
 | 에이전트 | 경로 | 역할 |
 |---------|------|------|
-| req-analyzer | `.claude/agents/req-analyzer.md` | 모호한 요구사항 분석 오케스트레이터 |
-| req-explorer | `.claude/agents/req-explorer.md` | 코드베이스/웹 맥락 수집 |
-| req-validator | `.claude/agents/req-validator.md` | 구현 가능성 + 방향 적절성 검증 |
+| req-analyzer | `.claude/agents/req-analyzer.md` | 요구사항 분석 허브 — 기획서/자연어 입력의 중앙 진입점 |
+| req-explorer | `.claude/agents/req-explorer.md` | 코드베이스/웹 맥락 수집 (req-analyzer 내부 위임) |
+| req-validator | `.claude/agents/req-validator.md` | 구현 가능성 + 방향 적절성 검증 (req-analyzer 내부 위임) |
+| spec-distiller | `.claude/agents/spec-distiller.md` | PM 기획서에서 Intent/Implementation 분리 (req-analyzer 내부 위임) |
 | design-challenger | `.claude/agents/design-challenger.md` | 설계/코드의 숨겨진 약점과 엣지케이스 발굴 |
 | decision-documenter | `.claude/agents/decision-documenter.md` | 기술 결정과 트레이드오프를 ADR 형식으로 기록 |
-| spec-distiller | `.claude/agents/spec-distiller.md` | PM 기획서에서 핵심 요구사항(Intent) 추출 및 성공 정의 도출 |
 | issue-filter | `.claude/agents/issue-filter.md` | Issue의 가치/범위 판단 + 다음 단계 라우팅 추천 |

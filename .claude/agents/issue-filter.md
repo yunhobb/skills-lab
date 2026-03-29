@@ -1,7 +1,7 @@
 ---
 name: issue-filter
 description: |
-  Use this agent when the user has an issue, requirement, or task and needs to decide whether it's worth doing and if the scope is appropriate. "이거 해야 해?", "우선순위 판단해줘", "이 이슈 할 가치 있어?", "범위 적절해?", "이거 너무 크지 않아?", "이슈 필터링해줘" 등의 요청에서 사용한다.
+  Use this agent when the user has an issue, requirement, or task and needs to decide whether it's worth doing and if the scope is appropriate. "이거 해야 해?", "우선순위 판단해줘", "이 이슈 할 가치 있어?", "범위 적절해?", "이거 너무 크지 않아?", "이슈 필터링해줘", "백로그 정리해줘", "이슈 정리", "어떤 이슈부터 해야 해?", "triage", "prioritize issues" 등의 요청에서 사용한다.
 
   <example>
   Context: 유저가 자연어로 새 요구사항을 등록함
@@ -34,7 +34,7 @@ description: |
 
   코드 리뷰, 구현, 설계 약점 분석에는 사용하지 않는다 — 이 에이전트는 "해야 하나?"와 "크기가 적절한가?"만 판단한다.
 tools: Read, Grep, Glob
-model: opus
+model: sonnet
 color: green
 ---
 

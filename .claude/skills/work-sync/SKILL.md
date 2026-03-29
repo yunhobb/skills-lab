@@ -1,7 +1,7 @@
 ---
 name: work-sync
 description: |
-  This skill should be used when the user asks to "결정사항 반영해줘", "이슈 업데이트해줘", "작업 정리해줘", "변경사항 반영", "대화 내용 정리해서 반영해줘", "이슈에 코멘트 남겨줘", "지금까지 한 거 정리", "의사결정 기록", "진행상황 업데이트", "work-sync", or wants conversation decisions captured in a tracking document. Also trigger when a work session is wrapping up and the user mentions syncing progress.
+  This skill should be used when the user asks to "이슈 업데이트해줘", "작업 정리해줘", "변경사항 반영", "대화 내용 정리해서 반영해줘", "이슈에 코멘트 남겨줘", "지금까지 한 거 정리", "진행상황 업데이트", "work-sync", or wants conversation progress captured in a tracking document (Issue comment or MD file). Also trigger when a work session is wrapping up and the user mentions syncing progress. ADR 수준의 상세 기술 결정 문서화("의사결정 기록", "결정 문서화", "ADR 작성")는 decision-documenter가 담당한다 — 이 스킬은 경량 진행 기록용이다.
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
