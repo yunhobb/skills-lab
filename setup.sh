@@ -13,6 +13,7 @@ SKILLS=(
   "agent-reviewer"
   "review-learnings"
   "deep-thinking"
+  "work-sync"
 )
 
 echo "=== skills-lab setup ==="
