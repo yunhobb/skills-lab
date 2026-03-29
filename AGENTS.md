@@ -158,6 +158,7 @@ Branch 이름은 `<type>/<short-description>` 패턴을 따른다. type은 `feat
 | req-validator | `.claude/agents/req-validator.md` | 구현 가능성 + 방향 적절성 검증 |
 | design-challenger | `.claude/agents/design-challenger.md` | 설계/코드의 숨겨진 약점과 엣지케이스 발굴 |
 | decision-documenter | `.claude/agents/decision-documenter.md` | 기술 결정과 트레이드오프를 ADR 형식으로 기록 |
+| spec-distiller | `.claude/agents/spec-distiller.md` | PM 기획서에서 핵심 요구사항(Intent) 추출 및 성공 정의 도출 |
 
 ## 컨벤션
 
