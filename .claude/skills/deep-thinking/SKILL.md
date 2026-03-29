@@ -1,7 +1,7 @@
 ---
 name: deep-thinking
 description: |
-  This skill should be used when the user asks to "깊이 생각해줘", "deep thinking", "설계 깊이 분석", "숨겨진 복잡성 찾아줘", "트레이드오프 분석", "구현 전 검토", or wants a structured deep-thinking workflow before implementation. Also trigger on "이중 락 같은 거 놓치고 있지 않나?", "이 설계 충분히 깊이 봤어?", "구현 전에 한번 점검해줘".
+  This skill should be used when the user wants a multi-step deep-thinking workflow before implementation — covering requirement analysis, weakness discovery, design revision, and decision documentation as a guided sequence. "깊이 생각해줘", "deep thinking", "구현 전에 전체적으로 점검해줘", "요구사항부터 설계까지 한번 훑어줘", "이 설계 충분히 깊이 봤어?". 단일 설계에 대한 약점 분석만 필요하면 design-challenger를 직접 사용한다 — 이 스킬은 여러 에이전트를 순서대로 안내하는 워크플로우 가이드다.
 allowed-tools: Read, Grep, Glob
 ---
 
@@ -78,6 +78,11 @@ design-challenger의 결과를 보고 설계를 보완한다. 이 단계는 에�
 - 명확한 요구사항 (1단계)
 - 알려진 위험과 대응 방안 (2-3단계)
 - 각 결정의 근거 (4단계)
+
+다음 에이전트로 이어갈 수 있다:
+- **design-architect**: 설계 결정을 기반으로 spec.md, plan.md, tasks.md를 생성
+- **tdd-implementor**: tasks.md 기반으로 RED→GREEN→REFACTOR 사이클로 구현
+- **code-reviewer**: 구현 완료 후 코드 리뷰
 
 ## 언제 이 워크플로우를 쓰는가
 

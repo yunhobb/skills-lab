@@ -1,7 +1,7 @@
 ---
 name: decision-documenter
 description: |
-  Use this agent when the user wants to document technical decisions, trade-offs, or design rationale. "결정 문서화해줘", "트레이드오프 정리해줘", "왜 이렇게 했는지 기록해줘", "ADR 작성해줘", "설계 결정 기록" 등의 요청에서 사용한다.
+  Use this agent when the user wants to document technical decisions, trade-offs, or design rationale as structured ADR files. "결정 문서화해줘", "트레이드오프 정리해줘", "왜 이렇게 했는지 기록해줘", "ADR 작성해줘", "설계 결정 기록", "의사결정 기록" 등의 요청에서 사용한다. 경량 진행 기록(Issue 코멘트, 체크리스트 업데이트)은 work-sync가 담당한다 — 이 에이전트는 ADR 수준의 상세 결정 문서화용이다.
 
   <example>
   Context: 유저가 설계를 마치고 결정 사항을 기록하려 함
@@ -33,7 +33,7 @@ description: |
   Use proactively after design-challenger 분석이 끝나고 설계 보완이 완료된 상태에서, 결정 사항을 기록할지 제안한다.
 
   코드 작성이나 구현에는 사용하지 않는다 — 이 에이전트는 결정을 기록하는 데만 집중한다.
-tools: Read, Write, Grep, Glob
+tools: Read, Write, Edit, Grep, Glob
 model: sonnet
 color: magenta
 ---

@@ -124,7 +124,13 @@ color: red
 심각도 기준:
 - **Critical**: 데이터 손실 또는 정합성 위반 — 반드시 해결해야 함
 - **Warning**: 성능 저하 또는 예외 상황에서 문제 — 해결 권장
-- **Info**: 개선 가능하지만 당장 터지지는 않음
+- **Info**: 개선 가능하지만 당장 터지지는 않음 (분석 에이전트이므로 Info 사용 — conventions.md 참조)
+
+## 후속 에이전트 연동
+
+약점 분석 후:
+- **decision-documenter**: 발견된 약점과 보완 결정을 ADR로 기록한다
+- **design-architect**: 설계 변경이 필요하면 spec.md/plan.md를 업데이트한다
 
 ## 제약사항
 

@@ -1,36 +1,27 @@
 ---
 name: spec-distiller
 description: |
-  Use this agent when the user has a PM planning document and wants to extract core requirements, separating what the PM truly needs (Intent) from technical suggestions (Implementation) and constraints. "기획서 분석해줘", "핵심 요구사항 뽑아줘", "이 기획서에서 진짜 필요한 거 뭐야?", "성공 정의 만들어줘", "기획서 정리해줘" 등의 요청에서 사용한다.
+  Use this agent when req-analyzer needs to separate Intent from Implementation in a PM planning document. req-analyzer delegates to this agent when the input is a structured planning document (기획서, PRD, spec) rather than raw natural language requirements.
 
   <example>
-  Context: 유저가 PM 기획서를 공유하며 핵심 요구사항 추출을 요청
-  user: "이 기획서에서 진짜 필요한 요구사항만 뽑아줘"
-  assistant: "spec-distiller로 기획서를 분석하여 핵심 요구사항을 추출하겠습니다."
+  Context: req-analyzer가 기획서 형태의 입력을 받아 Intent/Implementation 분리가 필요하다고 판단
+  user: (req-analyzer 내부 위임)
+  assistant: "기획서에서 Intent와 Implementation을 분리합니다."
   <commentary>
-  기획서에 기술적 구현 제안과 핵심 요구사항이 섞여 있을 가능성 — Intent와 Implementation을 분리해야 한다.
+  기획서에 기술적 구현 제안과 핵심 요구사항이 섞여 있을 때 — 분리 후 req-analyzer가 구체화를 진행한다.
   </commentary>
   </example>
 
   <example>
-  Context: 유저가 기획서의 기술적 내용이 구현 가능한지 의문을 가짐
-  user: "PM이 Redis 쓰라고 했는데 이게 진짜 요구사항이야 아니면 제안이야?"
-  assistant: "spec-distiller로 기획서를 분석하여 Intent와 Implementation을 분리하겠습니다."
+  Context: req-analyzer가 PM의 기술 제안과 비즈니스 요구를 구분해야 할 때
+  user: (req-analyzer 내부 위임)
+  assistant: "PM의 기술 제안과 실제 비즈니스 요구를 분리합니다."
   <commentary>
-  PM의 기술 제안과 실제 비즈니스 요구를 분리하는 전형적인 케이스.
+  "Redis를 사용해서 캐싱하라"는 Implementation이고, "응답 시간 200ms 이내"가 Intent — 이 구분이 핵심.
   </commentary>
   </example>
 
-  <example>
-  Context: 유저가 기획서를 받고 성공 기준을 정의하려 함
-  user: "이 기획서로 성공 정의 만들어줘"
-  assistant: "spec-distiller로 기획서에서 Intent를 추출하고 성공 정의를 도출하겠습니다."
-  <commentary>
-  성공 정의는 Intent에서 도출된다 — Implementation이 아닌 Intent 기반으로 정의해야 구현 방법이 바뀌어도 유효하다.
-  </commentary>
-  </example>
-
-  코드 리뷰, 버그 수정, 이미 구체적인 기술 사양이 있는 경우에는 사용하지 않는다.
+  직접 호출하지 않는다 — req-analyzer가 오케스트레이션한다.
 tools: Read, Glob, Grep
 model: sonnet
 color: cyan

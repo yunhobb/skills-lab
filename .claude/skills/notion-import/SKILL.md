@@ -1,7 +1,7 @@
 ---
 name: notion-import
 description: |
-  This skill should be used when the user wants to analyze a Notion document exported as PDF. "노션 기획서 분석", "notion-import", "기획서 PDF 분석", "노션 PDF 가져와", "기획서 분석해줘", "spec 분석", or when the user provides a PDF file path for requirement analysis. Also triggers on "요구사항 뽑아줘", "이슈 만들어줘" with a PDF.
+  This skill should be used when the user wants to import a Notion document exported as PDF for analysis. "노션 PDF 분석", "notion-import", "노션 PDF 가져와", "PDF 기획서 열어줘", or when the user provides a PDF file path (.pdf) for requirement analysis. PDF 파일 경로가 명시된 경우에만 트리거한다 — PDF 없이 "기획서 분석해줘"만 말하면 req-analyzer가 담당한다.
 allowed-tools: Read, Glob
 ---
 
@@ -38,6 +38,17 @@ PDF 내용을 파악한 뒤 요약을 보여준다:
 ### req-analyzer 연동
 
 분석을 진행하면 PDF 내용을 req-analyzer 에이전트에 전달한다. 이후 모호함 식별, 질문, Issue 생성은 req-analyzer가 수행한다 — 이 스킬에서 직접 분석하지 않는다.
+
+전달 형식:
+- **원문 텍스트**: PDF에서 추출한 전체 텍스트
+- **문서 메타데이터**: 제목, 페이지 수, 주요 섹션 목록
+- **입력 유형 힌트**: "기획서"임을 명시 — req-analyzer가 이를 보고 spec-distiller 위임 여부를 판단한다
+
+### 분석 후 다음 단계
+
+req-analyzer 분석이 완료되면 다음으로 이어갈 수 있다:
+- **design-architect**: 요구사항을 기반으로 spec.md, plan.md, tasks.md 생성
+- **deep-thinking**: 설계 검증 워크플로우 (약점 발굴 → 결정 문서화)
 
 ### 이미지 보완 (선택)
 
