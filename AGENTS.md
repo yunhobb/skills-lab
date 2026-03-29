@@ -144,10 +144,11 @@ Branch 이름은 `<type>/<short-description>` 패턴을 따른다. type은 `feat
 
 | 스킬 | 경로 | 역할 |
 |------|------|------|
-| skill-reviewer | `skill-reviewer/` | SKILL.md를 Anthropic 스타일 가이드 기준으로 리뷰 |
-| agent-reviewer | `agent-reviewer/` | 에이전트 정의 파일을 컨벤션 기준으로 리뷰 |
-| review-learnings | `review-learnings/` | PR 리뷰 댓글에서 규칙 추출 + 적절성 판단 |
-| deep-thinking | `deep-thinking/` | 구현 전 깊은 사고 워크플로우 가이드 (약점 발굴 → 결정 문서화) |
+| skill-reviewer | `.claude/skills/skill-reviewer/` | SKILL.md를 Anthropic 스타일 가이드 기준으로 리뷰 |
+| agent-reviewer | `.claude/skills/agent-reviewer/` | 에이전트 정의 파일을 컨벤션 기준으로 리뷰 |
+| review-learnings | `.claude/skills/review-learnings/` | PR 리뷰 댓글에서 규칙 추출 + 적절성 판단 |
+| deep-thinking | `.claude/skills/deep-thinking/` | 구현 전 깊은 사고 워크플로우 가이드 (약점 발굴 → 결정 문서화) |
+| notion-import | `.claude/skills/notion-import/` | Notion PDF 기획서 → req-analyzer 연동 |
 
 ## 에이전트 목록
 

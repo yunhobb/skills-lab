@@ -2,6 +2,8 @@
 
 Claude Code 스킬과 에이전트를 개발하고 테스트하는 레포지토리.
 
+> **[사용 가이드 (USAGE_GUIDE.md)](docs/USAGE_GUIDE.md)** — 스킬·에이전트의 유기적 조합 패턴과 실전 시나리오별 사용법
+
 ## 설치
 
 ```bash
@@ -16,10 +18,10 @@ bash setup.sh
 
 ```bash
 ls -la ~/.claude/skills/
-# skill-reviewer -> /path/to/skills-lab/skill-reviewer
-# agent-reviewer -> /path/to/skills-lab/agent-reviewer
-# review-learnings -> /path/to/skills-lab/review-learnings
-# deep-thinking  -> /path/to/skills-lab/deep-thinking
+# skill-reviewer -> /path/to/skills-lab/.claude/skills/skill-reviewer
+# agent-reviewer -> /path/to/skills-lab/.claude/skills/agent-reviewer
+# review-learnings -> /path/to/skills-lab/.claude/skills/review-learnings
+# deep-thinking  -> /path/to/skills-lab/.claude/skills/deep-thinking
 ```
 
 ### 심링크 제거
