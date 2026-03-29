@@ -8,6 +8,8 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 
 Review and rewrite SKILL.md files to follow Anthropic's prompt authoring best practices. The user provides a skill path — read the current SKILL.md, assess it across three dimensions (description quality, structure, writing style), and rewrite it in place.
 
+Do not use for production code review (use code-reviewer) or agent file review (use agent-reviewer) — this skill only handles SKILL.md files.
+
 ## Input
 
 The user provides a skill directory path (e.g., `~/.claude/skills/my-skill/`). Read the SKILL.md inside that directory. If the user provides the full file path, use it directly.

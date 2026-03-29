@@ -8,6 +8,8 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 
 Rewrite agent definition files (`.md` with YAML frontmatter) to follow Claude Code's agent authoring conventions. Read the agent file, evaluate it against the conventions, and rewrite it in place — improving style and completeness without changing behavior.
 
+Do not use for SKILL.md review (use skill-reviewer) or production code review (use code-reviewer) — this skill only handles agent definition files.
+
 ## Input
 
 The user provides an agent file path (e.g., `~/.claude/plugins/my-plugin/agents/code-reviewer.md`). Read the file directly. If the user provides a directory, look for `.md` files inside an `agents/` subdirectory. If exactly one agent `.md` file is found, treat that as the target. If multiple agent `.md` files are found, do not rewrite them all; instead, either ask the user to specify a single file or explain that they must provide a specific agent file path. Never rewrite more than one agent file per request.
